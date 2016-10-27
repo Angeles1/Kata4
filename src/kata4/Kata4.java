@@ -1,23 +1,16 @@
 package kata4;
 
-import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Kata4 {
 
-    public static void main(String[] args) {
-        File file = new File("c:\\Users\\usuario"); //linux "c:/"
-        print(file.listFiles(),""); //método recursivo
-    }
-
-    public static void print(File[] listFiles, String string) {
-        if(listFiles ==null) return;
-        for (File file : listFiles) {
-            System.out.println(string + (file.isDirectory()?
-                    "+" : "-") + file.getName());
-            
-            if(!file.isDirectory() || file.isHidden()) continue;
-            print(file.listFiles(),"  ");
-        }
+    public static void main(String[] args) throws IOException {
+        String filename ="C:\\Users\\usuario\\Documents\\NetBeansProjects\\Kata4\\src\\kata4\\emailsfilev1.txt" ;
+        ArrayList <String> mailList = MailListReader.read(filename);
+        Histogram <String> histogram = MailHistogramBuilder.build(mailList);
+        HistogramDisplay histoDisplay = new HistogramDisplay(histogram);
+        histoDisplay.execute();
     }
 
 }
